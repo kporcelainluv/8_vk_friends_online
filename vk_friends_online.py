@@ -22,19 +22,19 @@ def get_online_friends(login, password):
         scope="friends")
 
     vk_api = vk.API(session)
-    my_id = [id['uid'] for id in vk_api.users.get(user_id=0)]
-    list_of_online_ids = vk_api.friends.getOnline(user_id=my_id)
+    my_id_number = [id_number['uid'] for id_number in vk_api.users.get(user_id=0)]
+    list_of_online_id_numbers = vk_api.friends.getOnline(user_id=my_id_number)
     dict_of_info_firends_online = []
-    for friend_id in list_of_online_ids:
-        dict_of_info_firends_online.append(vk_api.users.get(user_id=friend_id))
+    for friend_id_number in list_of_online_id_numbers:
+        dict_of_info_firends_online.append(vk_api.users.get(user_id=friend_id_number))
     return dict_of_info_firends_online
 
 
-def output_friends_to_console(friends_online):
-    for friend in friends_online:
-        name = ("".join(data['first_name'] for data in friend))
-        surname = ("".join(data['last_name'] for data in friend))
-        print(name, surname)
+def output_friends_to_console(list_of_friends_online):
+    for friend in list_of_friends_online:
+        first_name = ("".join(friend_personal_info['first_name'] for friend_personal_info in friend))
+        second_name = ("".join(friend_personal_info['last_name'] for friend_personal_info in friend))
+        print(first_name, second_name)
 
 
 if __name__ == '__main__':
